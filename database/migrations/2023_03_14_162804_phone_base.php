@@ -24,6 +24,14 @@ return new class extends Migration
             $table->timestamps();
             //мягкое удаление (запись остается в бд, но не высвечивается)
             $table->softDeletes();
+
+            //создание категории id (unsignedBigInteger - тип значений только с плюсом)
+            $table->unsignedBigInteger('category_id')->nullable();
+            //создание индекса из id категории
+            $table->index('category_id', 'phone_category_idx');
+            //создание форинки которая берет данные из БД категории(on) (берет id(references))
+            $table->foreign('category_id', 'phone_category_fk')->on('categories')->references('id');
+
         });
     }
 

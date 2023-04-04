@@ -24,6 +24,14 @@
         <label for="country" class="form-label">Страна</label>
         <input type="text" class="form-control" name="country" id="country" placeholder="Введите страну">
     </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Категория</label>
+        <select class="form-select" name="category" aria-label="Default select example">
+            <option selected value="Личные">Личные</option>
+            <option value="Рабочие">Рабочие</option>
+            <option value="Прочие">Прочие</option>
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">Добавить контакт</button>
     <a class="btn btn-secondary" href="{{ route('phones.index') }}">Назад</a>
 </form>
