@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryModel;
 use App\Models\PhoneBaseModel;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,10 @@ class PhoneBaseController extends Controller
     }
     //функция создания записи в БД
     public function create() {
-        //возврат страницы создания записи в БД
-        return view('phone.create');
+        //передача категорий в форму создания телефона
+        $categories = CategoryModel::all();
+        //возврат страницы создания записи в БД и передача переменной категории
+        return view('phone.create', compact('categories'));
     }
     //функция приема данных из формы create и отображение в main
     public function store() {
@@ -28,6 +31,7 @@ class PhoneBaseController extends Controller
             'address'=>'string',
             'birthday'=>'date',
             'country'=>'string',
+            'category_id'=>'',
         ]);
         //передача в БД данных полученных из строки
         PhoneBaseModel::create($data);
@@ -40,7 +44,10 @@ class PhoneBaseController extends Controller
     }
     //функция редактирования записи в БД
     public function edit(PhoneBaseModel $phone) {
-        return view('phone.edit', compact('phone'));
+        //передача категорий в форму создания телефона
+        $categories = CategoryModel::all();
+        //возврат страницы редактирования записи в БД и передача переменной категории
+        return view('phone.edit', compact('phone', 'categories'));
     }
     //функция изменения записи в БД
     public function update(PhoneBaseModel $phone) {
@@ -51,6 +58,7 @@ class PhoneBaseController extends Controller
             'address'=>'string',
             'birthday'=>'date',
             'country'=>'string',
+            'category_id'=>'',
         ]);
         //обновляем контакт
         $phone->update($data);

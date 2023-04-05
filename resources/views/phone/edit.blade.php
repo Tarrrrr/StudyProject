@@ -26,6 +26,15 @@
         <label for="country" class="form-label">Страна</label>
         <input type="text" class="form-control" name="country" id="country" placeholder="Введите страну" value="{{ $phone->country }}">
     </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Категория</label>
+        <select class="form-select" name="category_id" id="category" aria-label="Default select example">
+            @foreach($categories as $category)
+                {{--cравниваем id категории и id категории и посте, возвращаем параметр селектед тому, который прописан в базе--}}
+                <option {{ $category->id === $phone->category->id ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
+            @endforeach
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">Обновить контакт</button>
     <a class="btn btn-secondary mx-2" href="{{ route('phones.index') }}">Назад</a>
 </form>

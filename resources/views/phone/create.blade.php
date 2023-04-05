@@ -26,10 +26,10 @@
     </div>
     <div class="mb-3">
         <label for="category" class="form-label">Категория</label>
-        <select class="form-select" name="category" aria-label="Default select example">
-            <option selected value="Личные">Личные</option>
-            <option value="Рабочие">Рабочие</option>
-            <option value="Прочие">Прочие</option>
+        <select class="form-select" name="category_id" id="category" aria-label="Default select example">
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->title }}</option>
+            @endforeach
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Добавить контакт</button>

@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('phone_comments', function (Blueprint $table) {
+        Schema::create('phone_tags', function (Blueprint $table) {
             $table->id();
             //создаем отношения телефона и комментария
             $table->unsignedBigInteger('phone_id');
-            $table->unsignedBigInteger('comment_id');
+            $table->unsignedBigInteger('tag_id');
 
-            $table->index('phone_id', 'phone_comment_phone_idx');
-            $table->index('comment_id', 'phone_comment_comment_idx');
+            $table->index('phone_id', 'phone_tag_phone_idx');
+            $table->index('tag_id', 'phone_tag_tag_idx');
 
-            $table->foreign('phone_id', 'phone_comment_phone_fk')->on('phone_base')->references('id');
-            $table->foreign('comment_id', 'phone_comment_comment_fk')->on('comments')->references('id');
+            $table->foreign('phone_id', 'phone_tag_phone_fk')->on('phone_base')->references('id');
+            $table->foreign('tag_id', 'phone_tag_tag_fk')->on('tags')->references('id');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('phone_comments');
+        Schema::dropIfExists('phone_tags');
     }
 };

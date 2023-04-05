@@ -18,6 +18,6 @@ class PhoneBaseModel extends Model
     }
     //определение, что у телефона может быть много комментариев
     public function comments() {
-        return $this->belongsToMany(CommentModel::class, 'phone_comments', 'phone_id', 'comment_id');
+        return $this->belongsToMany(TagModel::class, 'phone_tags', 'phone_id', 'tag_id');
     }
 }
