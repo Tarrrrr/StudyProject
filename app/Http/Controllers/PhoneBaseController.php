@@ -30,11 +30,12 @@ class PhoneBaseController extends Controller
     public function store() {
         //получение в переменную дата данных из формы create
         $data = request()->validate([
-            'name'=>'string',
-            'phone'=>'string',
-            'address'=>'string',
-            'birthday'=>'date',
-            'country'=>'string',
+            //required меняет поле уведомления ошибки на поле должно быть заполнено
+            'name'=>'required|string',
+            'phone'=>'required|string',
+            'address'=>'required|string',
+            'birthday'=>'required|date',
+            'country'=>'required|string',
             'category_id'=>'',
             'tags'=>'',
         ]);

@@ -6,29 +6,53 @@
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Имя</label>
-        <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя">
+        {{--валью собирает старое значение и подставляет в поле если ошибка по другому полю--}}
+        <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" value="{{ old('name') }}">
+        {{--ошибка введите данные при отправке пустой строки--}}
+        @error('name')
+            <p class="text-danger"> {{ $message }} </p>
+        @enderror
     </div>
     <div class="mb-3">
         <label for="phone" class="form-label">Телефон</label>
-        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Введите телефон">
+        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Введите телефон" value="{{ old('phone') }}">
+        {{--ошибка введите данные при отправке пустой строки--}}
+        @error('phone')
+        <p class="text-danger"> {{ $message }} </p>
+        @enderror
     </div>
     <div class="mb-3">
         <label for="address" class="form-label">Адрес</label>
-        <input type="text" class="form-control" name="address" id="address" placeholder="Введите адрес">
+        <input type="text" class="form-control" name="address" id="address" placeholder="Введите адрес" value="{{ old('address') }}">
+        {{--ошибка введите данные при отправке пустой строки--}}
+        @error('address')
+        <p class="text-danger"> {{ $message }} </p>
+        @enderror
     </div>
     <div class="mb-3">
         <label for="birthday" class="form-label">День рождения</label>
-        <input type="date" class="form-control" name="birthday" id="birthday" placeholder="Введите день рождения">
+        <input type="date" class="form-control" name="birthday" id="birthday" placeholder="Введите день рождения" value="{{ old('birthdate') }}">
+        {{--ошибка введите данные при отправке пустой строки--}}
+        @error('birthday')
+        <p class="text-danger"> {{ $message }} </p>
+        @enderror
     </div>
     <div class="mb-3">
         <label for="country" class="form-label">Страна</label>
-        <input type="text" class="form-control" name="country" id="country" placeholder="Введите страну">
+        <input type="text" class="form-control" name="country" id="country" placeholder="Введите страну" value="{{ old('country') }}">
+        {{--ошибка введите данные при отправке пустой строки--}}
+        @error('country')
+        <p class="text-danger"> {{ $message }} </p>
+        @enderror
     </div>
     <div class="mb-3">
         <label for="category" class="form-label">Категория</label>
         <select class="form-select" name="category_id" id="category" aria-label="Default select example">
             @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                <option
+                    {{--оставляем выбранной значение, если ошибка в форме--}}
+                    {{ old('category_id') == $category->id ? 'selected' : '' }}
+                    value="{{ $category->id }}">{{ $category->title }}</option>
             @endforeach
         </select>
     </div>
