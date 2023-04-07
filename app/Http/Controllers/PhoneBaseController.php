@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryModel;
 use App\Models\PhoneBaseModel;
+use App\Models\PhoneTagModel;
+use App\Models\TagModel;
 use Illuminate\Http\Request;
 
 class PhoneBaseController extends Controller
@@ -19,8 +21,10 @@ class PhoneBaseController extends Controller
     public function create() {
         //передача категорий в форму создания телефона
         $categories = CategoryModel::all();
-        //возврат страницы создания записи в БД и передача переменной категории
-        return view('phone.create', compact('categories'));
+        //передача на страницу создания телефона тегов
+        $tags = TagModel::all();
+        //возврат страницы создания записи в БД и передача переменной категории и теги
+        return view('phone.create', compact('categories','tags'));
     }
     //функция приема данных из формы create и отображение в main
     public function store() {
@@ -32,9 +36,16 @@ class PhoneBaseController extends Controller
             'birthday'=>'date',
             'country'=>'string',
             'category_id'=>'',
+            'tags'=>'',
         ]);
+        //разделение переданных данных на две группы (данные контакта и теги)
+        $tags = $data['tags'];
+        //удаление тегов из данных телефона
+        unset($data['tags']);
         //передача в БД данных полученных из строки
-        PhoneBaseModel::create($data);
+        $phone = PhoneBaseModel::create($data);
+        //обработка тегов и передача в базу данных PhoneTagController
+        $phone->tags()->attach($tags);
         //редирект на главную страницу, где список постов
         return redirect()->route('phones.index');
     }
@@ -46,8 +57,10 @@ class PhoneBaseController extends Controller
     public function edit(PhoneBaseModel $phone) {
         //передача категорий в форму создания телефона
         $categories = CategoryModel::all();
+        //передача тегов в форму изменения
+        $tags = TagModel::all();
         //возврат страницы редактирования записи в БД и передача переменной категории
-        return view('phone.edit', compact('phone', 'categories'));
+        return view('phone.edit', compact('phone', 'categories', 'tags'));
     }
     //функция изменения записи в БД
     public function update(PhoneBaseModel $phone) {
@@ -59,9 +72,16 @@ class PhoneBaseController extends Controller
             'birthday'=>'date',
             'country'=>'string',
             'category_id'=>'',
+            'tags'=>'',
         ]);
+        //разделение переданных данных на две группы (данные контакта и теги)
+        $tags = $data['tags'];
+        //удаление тегов из данных телефона
+        unset($data['tags']);
         //обновляем контакт
         $phone->update($data);
+        //добавление новых и удаление старых тегов
+        $phone->tags()->sync($tags);
         //выводим страницу обновленного контакта
         return redirect()->route('phones.show', $phone->id);
     }

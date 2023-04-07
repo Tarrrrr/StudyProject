@@ -32,6 +32,17 @@
             @endforeach
         </select>
     </div>
+    <div class="mb-3">
+        @foreach($tags as $tag)
+        <div class="form-check">
+            {{--прописать в инпуте нейм, а то не будет отдавать данные ([]-значит, что передается несколько значений)--}}
+            <input class="form-check-input" name="tags[]" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->id }}">
+            <label class="form-check-label" for="{{ $tag->id }}">
+                {{ $tag->tag }}
+            </label>
+        </div>
+        @endforeach
+    </div>
     <button type="submit" class="btn btn-primary">Добавить контакт</button>
     <a class="btn btn-secondary" href="{{ route('phones.index') }}">Назад</a>
 </form>

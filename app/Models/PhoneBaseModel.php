@@ -17,7 +17,7 @@ class PhoneBaseModel extends Model
         return $this->belongsTo(CategoryModel::class, 'category_id','id');
     }
     //определение, что у телефона может быть много комментариев
-    public function comments() {
+    public function tags() {
         return $this->belongsToMany(TagModel::class, 'phone_tags', 'phone_id', 'tag_id');
     }
 }
