@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\PhoneBaseControllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\PhoneBaseModel;
 
-class DestroyController extends Controller
+class DestroyController extends BaseController
 {
     //удаление записи из БД
     public function destroy(PhoneBaseModel $phone) {

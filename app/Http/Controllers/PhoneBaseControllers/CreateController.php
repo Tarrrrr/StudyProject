@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\PhoneBaseControllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\CategoryModel;
 use App\Models\TagModel;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     //функция создания записи в БД
     public function create() {

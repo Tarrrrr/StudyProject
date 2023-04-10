@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\PhoneBaseControllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\PhoneBaseModel;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     //функция отражения записей из БД
     public function index() {
