@@ -3,23 +3,15 @@
 namespace App\Http\Controllers\PhoneBaseControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PhoneBaseRequests\StoreRequest;
 use App\Models\PhoneBaseModel;
 
 class StoreController extends Controller
 {
     //функция приема данных из формы create и отображение в main
-    public function store() {
-        //получение в переменную дата данных из формы create
-        $data = request()->validate([
-            //required меняет поле уведомления ошибки на поле должно быть заполнено
-            'name'=>'required|string',
-            'phone'=>'required|string',
-            'address'=>'required|string',
-            'birthday'=>'required|date',
-            'country'=>'required|string',
-            'category_id'=>'',
-            'tags'=>'',
-        ]);
+    public function store(StoreRequest $request) {
+        //получение данных из реквеста
+        $data = $request->validated();
         //разделение переданных данных на две группы (данные контакта и теги)
         $tags = $data['tags'];
         //удаление тегов из данных телефона

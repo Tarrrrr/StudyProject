@@ -3,22 +3,15 @@
 namespace App\Http\Controllers\PhoneBaseControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PhoneBaseRequests\UpdateRequest;
 use App\Models\PhoneBaseModel;
 
 class UpdateController extends Controller
 {
     //функция изменения записи в БД
-    public function update(PhoneBaseModel $phone) {
-        //забираем данные с БД и помещаем в переменную
-        $data = request()->validate([
-            'name'=>'string',
-            'phone'=>'string',
-            'address'=>'string',
-            'birthday'=>'date',
-            'country'=>'string',
-            'category_id'=>'',
-            'tags'=>'',
-        ]);
+    public function update(UpdateRequest $request, PhoneBaseModel $phone) {
+        //забираем данные из реквеста
+        $data = $request->validated();
         //разделение переданных данных на две группы (данные контакта и теги)
         $tags = $data['tags'];
         //удаление тегов из данных телефона
