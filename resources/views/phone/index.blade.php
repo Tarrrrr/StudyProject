@@ -10,5 +10,9 @@
             {{--а делает запись кликабельной, переходит на карточку контакта и выводит id в http--}}
             <div>- <a href="{{ route('phones.show', $phone->id) }}">{{ $phone->name }}</a></div>
         @endforeach
+        {{--вывод меню всех страниц контактов--}}
+        <div class="mt-3">
+            {{ $phones->links() }}
+        </div>
     </div>
 @endsection
