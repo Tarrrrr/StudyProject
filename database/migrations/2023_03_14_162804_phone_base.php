@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             //nullable - значит, что не может быть пустым и равняться нулю, будет выдавать ошибку
             $table->string('name')->nullable();
-            $table->bigInteger('phone')->nullable();
+            $table->text('phone')->nullable();
             $table->string('address')->nullable();
             $table->date('birthday')->nullable();
             $table->string('country')->nullable();
