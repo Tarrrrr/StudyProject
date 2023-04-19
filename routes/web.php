@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\PhoneBaseControllers\IndexController;
-use App\Http\Controllers\PhoneBaseControllers\CreateController;
-use App\Http\Controllers\PhoneBaseControllers\StoreController;
-use App\Http\Controllers\PhoneBaseControllers\ShowController;
-use App\Http\Controllers\PhoneBaseControllers\UpdateController;
-use App\Http\Controllers\PhoneBaseControllers\EditController;
-use App\Http\Controllers\PhoneBaseControllers\DestroyController;
+use App\Http\Controllers\adminControllers\adminController;
+use App\Http\Controllers\phoneBaseControllers\createController;
+use App\Http\Controllers\phoneBaseControllers\destroyController;
+use App\Http\Controllers\phoneBaseControllers\editController;
+use App\Http\Controllers\phoneBaseControllers\indexController;
+use App\Http\Controllers\phoneBaseControllers\showController;
+use App\Http\Controllers\phoneBaseControllers\storeController;
+use App\Http\Controllers\phoneBaseControllers\updateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,16 +21,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //роут к выводу всех записей в БД с функцией индекс (забор с контроллера) с именем по конвенции ларавел
-Route::get('/phones', [IndexController::class, 'index'])->name('phones.index');
+Route::get('/phones', [indexController::class, 'index'])->name('phoneBaseViews.index');
+//роут к админ панели
+Route::get('/admin', [adminController::class, '__invoke'])->name('layouts.admin');
 //роут к созданию записи в БД с функцией create и именем по конвенции
-Route::get('/phones/create', [CreateController::class, 'create'])->name('phones.create');
+Route::get('/phones/create', [createController::class, 'create'])->name('phoneBaseViews.create');
 //роут, куда придут данные с формы create с именем по конвенции ларавел
-Route::post('/phones', [StoreController::class, 'store'])->name('phones.store');
+Route::post('/phones', [storeController::class, 'store'])->name('phoneBaseViews.store');
 //роут отображения всех телефонов из БД
-Route::get('/phones/{phone}', [ShowController::class, 'show'])->name('phones.show');
+Route::get('/phones/{phone}', [showController::class, 'show'])->name('phoneBaseViews.show');
 //роут редактирования записи в БД (страница редактирования)
-Route::get('/phones/{phone}/edit', [EditController::class, 'edit'])->name('phones.edit');
+Route::get('/phones/{phone}/edit', [editController::class, 'edit'])->name('phoneBaseViews.edit');
 //роут изменения записи БД
-Route::patch('/phones/{phone}', [UpdateController::class, 'update'])->name('phones.update');
+Route::patch('/phones/{phone}', [updateController::class, 'update'])->name('phoneBaseViews.update');
 //роут удаления удаления записи БД
-Route::delete('/phones/{phone}', [DestroyController::class, 'destroy'])->name('phones.delete');
+Route::delete('/phones/{phone}', [destroyController::class, 'destroy'])->name('phoneBaseViews.delete');
