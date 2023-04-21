@@ -24,7 +24,7 @@ Auth::routes();
 //роут авторизации
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //роут к выводу всех записей в БД с функцией индекс (забор с контроллера) с именем по конвенции ларавел
-Route::get('/home', [indexController::class, 'index'])->name('phoneBaseViews.index');
+Route::get('/home', [indexController::class, 'index'])->middleware('admin')->name('phoneBaseViews.index');
 //роут к админ панели
 Route::get('/admin', [adminController::class, '__invoke'])->name('layouts.admin');
 //роут к созданию записи в БД с функцией create и именем по конвенции
