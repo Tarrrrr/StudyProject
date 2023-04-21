@@ -17,9 +17,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('phoneBaseViews.index') }}">Контакты</a>
                     </li>
+                    {{--ссылка появляется если юзер-админ--}}
+                    @can('view', auth()->user())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('layouts.admin') }}">Панель администратора</a>
                     </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">Личный кабинет</a>
                     </li>
