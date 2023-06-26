@@ -16,6 +16,8 @@ class service
         $phone = phoneBaseModel::create($data);
         //обработка тегов и передача в базу данных PhoneTagController
         $phone->tags()->attach($tags);
+        //возвращение данных телефона
+        return $phone;
     }
     //функция изменения записи в БД
     public function update($phone, $data) {

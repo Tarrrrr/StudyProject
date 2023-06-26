@@ -8,7 +8,7 @@
         @foreach($phones as $phone)
             {{--из фоун мы забираем данные из бд - ид и имя--}}
             {{--а делает запись кликабельной, переходит на карточку контакта и выводит id в http--}}
-            <div>- <a href="{{ route('phoneBaseViews.show', $phone->id) }}">{{ $phone->name }}</a></div>
+            <div><a href="{{ route('phoneBaseViews.show', $phone->id) }}">{{ $phone->name }}</a></div>
         @endforeach
         {{--вывод меню всех страниц контактов+учитываем строку запроса--}}
         <div class="mt-3">
